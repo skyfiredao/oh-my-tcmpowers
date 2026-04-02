@@ -1,0 +1,17 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "agent": {
+    "omtp-agent-BianQue": {
+      "model": "anthropic/claude-sonnet-4-20250514",
+      "description": "Oh My TCM Powers 诊断专家（入口路由）"
+    },
+    "omtp-agent-TaoHongJing": {
+      "model": "anthropic/claude-sonnet-4-20250514",
+      "description": "Oh My TCM Powers 中药专家"
+    },
+    "omtp-agent-HuangFuMi": {
+      "model": "anthropic/claude-sonnet-4-20250514",
+      "description": "Oh My TCM Powers 针灸专家"
+    }
+  }
+}
