@@ -11,6 +11,8 @@ description: Use when analyzing acupuncture point combinations to deduce therape
 
 必须前置加载 `omtp-core-zj` 作为理论基础（经络五行归属、五俞穴体系、特定穴分类、表里关系等）。
 
+本 skill 从**档案目录**读取穴位数据文件。档案目录由调用方（agent）指定，格式为 `docs/YYMMDD-hhmmss/`，调用前所需穴位数据文件已由 agent 从 `data/` symlink 到该目录。正文中「档案目录中 xxx.md」均指此路径。
+
 ## 输入
 
 用户提供穴位组合，包含：
@@ -46,8 +48,8 @@ description: Use when analyzing acupuncture point combinations to deduce therape
 
 数据引用：
 
-- `data/zj-12zj-*.md`
-- `data/zj-qj8m-*.md`
+- 档案目录中 `zj-12zj-*.md`
+- 档案目录中 `zj-qj8m-*.md`
 
 逐穴输出最少包含：
 

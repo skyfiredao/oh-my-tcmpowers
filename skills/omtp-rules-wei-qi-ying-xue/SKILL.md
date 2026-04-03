@@ -13,6 +13,8 @@ description: Use when staging warm-disease (wenbing) progression through the fou
 
 本 skill 无前置 skill 依赖。分期判断基于症状表现和舌脉特征，不依赖五行互含体系。
 
+本 skill 从**档案目录**读取数据文件。档案目录由调用方（agent）指定，格式为 `docs/YYMMDD-hhmmss/`，调用前所需数据文件已由 agent 从 `data/` symlink 到该目录。正文中「档案目录中 xxx.md」均指此路径。
+
 ## 卫气营血四分期总则
 
 叶天士《温热论》核心纲领：
@@ -107,5 +109,5 @@ description: Use when staging warm-disease (wenbing) progression through the fou
 | 关系 | 技能 | 说明 |
 |------|------|------|
 | 上游（分析输入） | omtp-analyze-zhengzhuang | 从共享契约读取症状分析结果作为分期判断依据 |
-| 数据源 | data/wenbing-wei-qi-ying-xue.md | 卫气营血分期数据表 |
+| 数据源 | 档案目录中 wenbing-wei-qi-ying-xue.md | 卫气营血分期数据表 |
 | 平行 | omtp-rules-sanjiao | 温病另一分期维度（横向分区 vs 本 skill 纵向分层） |

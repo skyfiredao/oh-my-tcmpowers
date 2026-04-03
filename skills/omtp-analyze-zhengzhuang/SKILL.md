@@ -11,6 +11,8 @@ description: Use when analyzing symptoms to deduce the affected organ and pathol
 
 必须前置加载 omtp-core-fxj 作为理论基础（五行互含、体用化推导、经文苦证与五脏之德）。
 
+本 skill 从**档案目录**读取数据文件。档案目录由调用方（agent）指定，格式为 `docs/YYMMDD-hhmmss/`，调用前所需数据文件已由 agent 从 `data/` symlink 到该目录。正文中「档案目录中 xxx.md」均指此路径。
+
 ## 输入
 
 用户提供：
@@ -53,11 +55,11 @@ description: Use when analyzing symptoms to deduce the affected organ and pathol
 
 ### 第二级：经文锚点匹配
 
-读取 `data/fxj-zhengzhuang.md` 中"经文核心症状群"表，将输入症状与各脏核心症状逐条比对。命中标注"锚点"。该表中"虚证补充"列的症状在锚点命中时同时提示虚证方向，可辅助第八步体用化判断。
+读取档案目录中 `fxj-zhengzhuang.md` 中"经文核心症状群"表，将输入症状与各脏核心症状逐条比对。命中标注"锚点"。该表中"虚证补充"列的症状在锚点命中时同时提示虚证方向，可辅助第八步体用化判断。
 
 ### 经文外邪症状匹配
 
-读取 `data/fxj-zhengzhuang.md` 中"经文外邪症状群"表，将输入症状与各脏外邪症状逐条比对。外邪命中标注"外邪锚点"。
+读取档案目录中 `fxj-zhengzhuang.md` 中"经文外邪症状群"表，将输入症状与各脏外邪症状逐条比对。外邪命中标注"外邪锚点"。
 
 当症状同时命中核心症状表和外邪症状表时，需结合发病情境（是否有外感诱因）判断内伤还是外邪入脏。外邪锚点的存在提示可能需要路由到 `omtp-rules-fxj2d6s`（外感方），但最终路由仍在第五步综合判断。
 
@@ -116,7 +118,7 @@ description: Use when analyzing symptoms to deduce the affected organ and pathol
 
 ### 症状八纲属性查表
 
-读取 `data/fxj-zhengzhuang.md` 中"症状八纲属性表"，将第一步提取的每条症状与表中条目比对：
+读取档案目录中 `fxj-zhengzhuang.md` 中"症状八纲属性表"，将第一步提取的每条症状与表中条目比对：
 
 1. **命中**：直接引用表中的表里/寒热/虚实属性
 2. **未命中**：根据以下规则推导：
@@ -139,7 +141,7 @@ description: Use when analyzing symptoms to deduce the affected organ and pathol
 
 ### 与经文虚实情志表交叉
 
-将八纲虚实结论与 `data/fxj-zhengzhuang.md` 经文虚实情志表对照。若主病脏腑的虚实情志标志出现在输入中，视为强化证据；若矛盾则标注，保留两种判断。
+将八纲虚实结论与档案目录中 `fxj-zhengzhuang.md` 经文虚实情志表对照。若主病脏腑的虚实情志标志出现在输入中，视为强化证据；若矛盾则标注，保留两种判断。
 
 ### 输出
 
@@ -169,7 +171,7 @@ description: Use when analyzing symptoms to deduce the affected organ and pathol
 - 遇到缺失环节就跳过 -- 标注为待验证假设，说明假设内容和验证方向
 - 输入含脉象信息却不触发步骤 6 -- 有脉象必须加载 omtp-analyze-maizhen 执行交叉验证
 - 跳过八纲归纳直接进入脉象交叉验证 -- 八纲归纳是必填步骤，为下游提供表里寒热虚实判断
-- 八纲属性不查表直接凭感觉判定 -- 必须优先查 data/fxj-zhengzhuang.md 症状八纲属性表
+- 八纲属性不查表直接凭感觉判定 -- 必须优先查档案目录中 fxj-zhengzhuang.md 症状八纲属性表
 
 ## 与其他技能的关系
 

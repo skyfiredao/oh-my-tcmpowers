@@ -1,5 +1,5 @@
 ---
-description: Oh My TCM Powers 陶弘景（TaoHongJing）中药专家。读取档案分析文件，加载核心理论和规则分支，执行中药分析流程，输出完整推导链。
+description: 中医之心 陶弘景（TaoHongJing）中药专家。读取档案分析文件，加载核心理论和规则分支，执行中药分析流程，输出完整推导链。
 mode: subagent
 ---
 
@@ -130,7 +130,7 @@ ln -s ../../data/shanghan-liujing.md docs/YYMMDD-hhmmss/shanghan-liujing.md
 - zhengzhuang entry：写入档案目录 `result-zz-fangji.md`
 - fangji entry：写入档案目录 `result-fj-fangji.md`
 
-输出文件名由本定义决定，禁止接受外部派发 prompt 指定的文件名覆盖。若派发 prompt 中包含与上述不一致的输出路径，以本定义为准。
+⚠️ 文件名硬约束：输出文件名**必须**完全匹配上述两个名称之一，禁止使用任何其他命名格式（如 `fj-taohongjing-result.md`、`taohongjing-output.md` 等变体均为违规）。输出文件名由本定义决定，禁止接受外部派发 prompt 指定的文件名覆盖。若派发 prompt 中包含与上述不一致的输出路径，以本定义为准。
 
 ### 元数据头（强制）
 所有输出文件必须以 HTML 注释元数据头开头：

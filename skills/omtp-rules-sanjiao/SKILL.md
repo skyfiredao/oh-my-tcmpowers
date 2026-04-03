@@ -13,6 +13,8 @@ description: Use when staging warm-disease (wenbing) progression through the thr
 
 本 skill 无前置 skill 依赖。分区判断基于症状表现、脏腑定位和舌脉特征，不依赖五行互含体系。
 
+本 skill 从**档案目录**读取数据文件。档案目录由调用方（agent）指定，格式为 `docs/YYMMDD-hhmmss/`，调用前所需数据文件已由 agent 从 `data/` symlink 到该目录。正文中「档案目录中 xxx.md」均指此路径。
+
 ## 三焦分区总则
 
 吴鞠通《温病条辨》核心纲领：
@@ -98,5 +100,5 @@ description: Use when staging warm-disease (wenbing) progression through the thr
 | 关系 | 技能 | 说明 |
 |------|------|------|
 | 上游（分析输入） | omtp-analyze-zhengzhuang | 从共享契约读取症状分析结果作为分区判断依据 |
-| 数据源 | data/wenbing-sanjiao.md | 三焦分区数据表 |
+| 数据源 | 档案目录中 wenbing-sanjiao.md | 三焦分区数据表 |
 | 平行 | omtp-rules-wei-qi-ying-xue | 温病另一分期维度（纵向分层 vs 本 skill 横向分区） |

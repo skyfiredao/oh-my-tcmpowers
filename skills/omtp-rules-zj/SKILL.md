@@ -11,13 +11,15 @@ description: Use when selecting acupoint combinations for treatment - contains 1
 
 必须先加载 `omtp-core-zj`。本 skill 默认沿用 core 中经脉体系、穴性分类与术语约定，不在此重复。
 
+本 skill 从**档案目录**读取穴位数据文件。档案目录由调用方（agent）指定，格式为 `docs/YYMMDD-hhmmss/`，调用前所需穴位数据文件已由 agent 从 `data/` symlink 到该目录。正文中「档案目录中 xxx.md」均指此路径。
+
 ## 数据引用
 
-穴位名称与归经查询请优先引用项目数据文件：
+穴位名称与归经查询请优先引用档案目录中的穴位数据文件：
 
-- `data/zj-12zj-*.md`（十二正经）
-- `data/zj-qj8m-*.md`（奇经八脉）
-- 其他 `data/zj-*.md`（分类扩展）
+- 档案目录中 `zj-12zj-*.md`（十二正经）
+- 档案目录中 `zj-qj8m-*.md`（奇经八脉）
+- 档案目录中其他 `zj-*.md`（分类扩展）
 
 本规则 skill 不重复展开完整穴位明细表，仅给出规则框架与配穴逻辑。
 

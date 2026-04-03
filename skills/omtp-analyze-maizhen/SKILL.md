@@ -11,7 +11,9 @@ description: Use when analyzing pulse descriptions to deduce organ-pathology con
 
 ## 前置条件
 
-必须前置加载 omtp-core-fxj 作为理论基础（五行互含、体用化结构）。脉象数据从 `data/fxj-maixiang.md` 读取。
+必须前置加载 omtp-core-fxj 作为理论基础（五行互含、体用化结构）。
+
+本 skill 从**档案目录**读取数据文件。档案目录由调用方（agent）指定，格式为 `docs/YYMMDD-hhmmss/`，调用前所需数据文件已由 agent 从 `data/` symlink 到该目录。正文中「档案目录中 xxx.md」均指此路径。脉象数据从档案目录中 `fxj-maixiang.md` 读取。
 
 ## 输入
 
@@ -41,7 +43,7 @@ description: Use when analyzing pulse descriptions to deduce organ-pathology con
 ### 提取规则
 
 1. **识别脉象术语**：从输入文本中识别所有脉象相关词汇，包括单脉（如"弦""数""沉"）和复合描述（如"弦数""沉迟无力"）
-2. **标准化名称**：将别名或非标准表述映射到 27 脉规范名。对照 `data/fxj-maixiang.md` 27 脉分类表
+2. **标准化名称**：将别名或非标准表述映射到 27 脉规范名。对照档案目录中 `fxj-maixiang.md` 27 脉分类表
    - "软"→"濡"（《脉经》→《濒湖脉学》）
    - "快"→"数"（经文用语→规范脉名）
 3. **拆分复合脉象**：将复合描述拆为独立脉象要素
@@ -67,7 +69,7 @@ description: Use when analyzing pulse descriptions to deduce organ-pathology con
 
 ## 第二步：六部脉位→脏腑定位
 
-将脉位信息映射到对应脏腑。对照 `data/fxj-maixiang.md` 六部脉位-脏腑映射表。
+将脉位信息映射到对应脏腑。对照档案目录中 `fxj-maixiang.md` 六部脉位-脏腑映射表。
 
 ### 映射规则
 
@@ -91,7 +93,7 @@ description: Use when analyzing pulse descriptions to deduce organ-pathology con
 
 ### 脉位循行序校验
 
-若多个脉位同时异常，参照 `data/fxj-maixiang.md` 五行脉位循行序（左尺水→左关木→左寸火→右尺火→右关土→右寸金→左尺水），检查异常传导方向是否符合五行相生序。
+若多个脉位同时异常，参照档案目录中 `fxj-maixiang.md` 五行脉位循行序（左尺水→左关木→左寸火→右尺火→右关土→右寸金→左尺水），检查异常传导方向是否符合五行相生序。
 
 ### 输出格式
 
@@ -100,7 +102,7 @@ description: Use when analyzing pulse descriptions to deduce organ-pathology con
 
 ## 第三步：脉质→五行归属
 
-将脉象的质性特征映射到五行。对照 `data/fxj-maixiang.md` 脉象五行归属表。
+将脉象的质性特征映射到五行。对照档案目录中 `fxj-maixiang.md` 脉象五行归属表。
 
 ### 映射规则
 
@@ -130,7 +132,7 @@ description: Use when analyzing pulse descriptions to deduce organ-pathology con
 
 ## 第四步：参数轴判定（虚实/寒热/表里）
 
-用四参数轴评估整体病性。对照 `data/fxj-maixiang.md` 四参数轴判定规则。
+用四参数轴评估整体病性。对照档案目录中 `fxj-maixiang.md` 四参数轴判定规则。
 
 ### 四轴判定
 
@@ -143,7 +145,7 @@ description: Use when analyzing pulse descriptions to deduce organ-pathology con
 
 ### 复合脉象判定
 
-对照 `data/fxj-maixiang.md` 复合脉象判定表，识别已知复合模式：
+对照档案目录中 `fxj-maixiang.md` 复合脉象判定表，识别已知复合模式：
 - 浮+有力 → 表实
 - 数+无力 → 虚热
 - 沉+迟+无力 → 阳虚寒盛
@@ -162,7 +164,7 @@ description: Use when analyzing pulse descriptions to deduce organ-pathology con
 
 ## 第五步：体用化层推断
 
-将脉象分析结果映射到辅行诀体用化三层体系。对照 `data/fxj-maixiang.md` 复合脉象判定表中的体用化层列。
+将脉象分析结果映射到辅行诀体用化三层体系。对照档案目录中 `fxj-maixiang.md` 复合脉象判定表中的体用化层列。
 
 ### 层判定规则
 
@@ -174,7 +176,7 @@ description: Use when analyzing pulse descriptions to deduce organ-pathology con
 
 ### 经文脉象验证
 
-若输入脉象与 `data/fxj-maixiang.md` 辅行诀经文脉象引用表中的经文脉象匹配，直接引用该表的体用化层结论作为辅助验证。
+若输入脉象与档案目录中 `fxj-maixiang.md` 辅行诀经文脉象引用表中的经文脉象匹配，直接引用该表的体用化层结论作为辅助验证。
 
 示例："脉弱而结"→ 命中"大补肝汤"条目 → 肝-虚-用虚 → 与本步推断对照
 
@@ -237,5 +239,5 @@ description: Use when analyzing pulse descriptions to deduce organ-pathology con
 |------|------|------|
 | 下游（前置依赖） | omtp-core-fxj | 五行互含、体用化结构（共用理论基础） |
 | 上游（触发条件） | omtp-analyze-zhengzhuang | 症状分析步骤 1-5 完成后，若存在脉象信息则触发本技能执行步骤 6 |
-| 数据源 | data/fxj-maixiang.md | 27 脉分类表、六部脉位映射、五行归属、参数轴规则、复合脉象表、经文脉象引用 |
+| 数据源 | 档案目录中 fxj-maixiang.md | 27 脉分类表、六部脉位映射、五行归属、参数轴规则、复合脉象表、经文脉象引用 |
 | 平行（交叉验证） | omtp-analyze-fangji | 方剂分析的脏腑结论可与脉象分析交叉验证 |

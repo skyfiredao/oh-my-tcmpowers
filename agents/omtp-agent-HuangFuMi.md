@@ -1,5 +1,5 @@
 ---
-description: Oh My TCM Powers 皇甫谧（HuangFuMi）针灸专家。读取档案分析文件，加载针灸核心理论和取穴规则，执行针灸分析流程，输出取穴组合。
+description: 中医之心 皇甫谧（HuangFuMi）针灸专家。读取档案分析文件，加载针灸核心理论和取穴规则，执行针灸分析流程，输出取穴组合。
 mode: subagent
 ---
 
@@ -123,7 +123,7 @@ ln -s ../../data/zj-12zj-shou-taiyin-fei.md docs/YYMMDD-hhmmss/zj-12zj-shou-taiy
 - zhengzhuang entry：写入档案目录 `result-zz-zhenjiu.md`
 - zhenjiu entry：写入档案目录 `result-zj-zhenjiu.md`
 
-输出文件名由本定义决定，禁止接受外部派发 prompt 指定的文件名覆盖。若派发 prompt 中包含与上述不一致的输出路径，以本定义为准。
+⚠️ 文件名硬约束：输出文件名**必须**完全匹配上述两个名称之一，禁止使用任何其他命名格式（如 `zj-huangfumi-result.md`、`huangfumi-output.md` 等变体均为违规）。输出文件名由本定义决定，禁止接受外部派发 prompt 指定的文件名覆盖。若派发 prompt 中包含与上述不一致的输出路径，以本定义为准。
 
 ### 元数据头（强制）
 所有输出文件必须以 HTML 注释元数据头开头：

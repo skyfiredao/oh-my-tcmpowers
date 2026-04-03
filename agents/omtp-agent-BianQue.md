@@ -1,5 +1,5 @@
 ---
-description: Oh My TCM Powers 扁鹊（BianQue）全科诊断专家。接收症状/药方/穴位输入，判断入口类型，创建档案目录，派发专家 agent，汇总结果。
+description: 中医之心 扁鹊（BianQue）全科诊断专家。接收症状/药方/穴位输入，判断入口类型，创建档案目录，派发专家 agent，汇总结果。
 mode: primary
 ---
 
@@ -82,10 +82,13 @@ symlink 由各专家 agent 自行创建；脉诊数据由 router 在执行步骤
 ### 4) 前缀命名规则
 | Prefix | Meaning | Example |
 | --- | --- | --- |
-| `zz-` | zhengzhuang entry | `zz-input.md` |
-| `fj-` | fangji entry | `fj-input.md` |
-| `zj-` | zhenjiu entry | `zj-input.md` |
+| `zz-` | zhengzhuang entry input | `zz-input.md` |
+| `fj-` | fangji entry input | `fj-input.md` |
+| `zj-` | zhenjiu entry input | `zj-input.md` |
 | `shared-` | multi-agent shared consumption | `shared-zhengzhuang-analyze.md` |
+| `result-` | expert output (format: `result-{entry}-{expert}`) | `result-zz-fangji.md`, `result-zj-zhenjiu.md` |
+
+⚠️ 注意：输入文件和输出文件使用不同前缀。输入文件以入口前缀开头（`zz-`/`fj-`/`zj-`），专家输出文件以 `result-` 开头。完整文件名以上方"全入口文件清单"为准。
 
 ### 5) 元数据头格式
 每个档案文件头部必须包含 HTML 注释元数据，格式如下：

@@ -1,4 +1,6 @@
-# Oh My TCM Powers (oh-my-tcmpowers)
+# 中医之心 Oh My TCM Powers (oh-my-tcmpowers)
+
+> **中医之心** — 澎湃动力，源自核心
 
 **[中文文档](README_zh.md)**
 
@@ -6,7 +8,7 @@ An AI skill set + agent orchestration layer for **analyzing Traditional Chinese 
 
 ## What It Does
 
-Oh My TCM Powers provides a structured, rule-driven framework for analyzing herbal formulas, acupoint combinations, and clinical symptoms using the *Fuxingjue* theory system. It deduces therapeutic mechanisms through five-phase relationships, ti-yong-hua (body-function-transformation) layering, and quantified composition rules.
+Oh My TCM Powers (中医之心) provides a structured, rule-driven framework for analyzing herbal formulas, acupoint combinations, and clinical symptoms using the *Fuxingjue* theory system. It deduces therapeutic mechanisms through five-phase relationships, ti-yong-hua (body-function-transformation) layering, and quantified composition rules.
 
 - **3 agents + 14 skills**: agents handle routing and orchestration, skills provide pure domain knowledge
 - **Three-layer architecture**: agent (routing/orchestration/archive) → skill (core theory/rules/analysis methods) → data (herb tables/acupoint tables/symptom data)
@@ -90,43 +92,43 @@ Oh My TCM Powers provides a structured, rule-driven framework for analyzing herb
 User Input
   ↓
 Agent Layer (routing + orchestration + archive)
-  BianQue (扁鹊)             # general practitioner, diagnosis, dispatch, summary
-    ├── TaoHongJing (陶弘景) # herbal medicine expert
-    └── HuangFuMi (皇甫谧)  # acupuncture expert
+  BianQue (扁鹊)                 # general practitioner, diagnosis, dispatch, summary
+    ├── TaoHongJing (陶弘景)     # herbal medicine expert
+    └── HuangFuMi (皇甫谧)       # acupuncture expert
 
   ↓ loads
 
 Skill Layer (pure domain knowledge, no routing)
 
   Analysis Methods
-    analyze-fangji          # herb positioning + statistics
-    analyze-zhengzhuang     # symptom extraction + organ map
-    analyze-maizhen         # pulse diagnosis + cross-validation
-    analyze-zhenjiu         # acupoint analysis + matching
+    analyze-fangji              # herb positioning + statistics
+    analyze-zhengzhuang         # symptom extraction + organ map
+    analyze-maizhen             # pulse diagnosis + cross-validation
+    analyze-zhenjiu             # acupoint analysis + matching
 
   Core Theory
-    core-fxj                # five-phase, ti-yong-hua, 60 herbs
-    core-zj                 # meridians, five-shu-points
+    core-fxj                    # five-phase, ti-yong-hua, 60 herbs
+    core-zj                     # meridians, five-shu-points
 
   Rules
-    rules-fxj5z             # five-organ supplement/drain
-    rules-fxj1xz            # heart-spirit virtual organ
-    rules-fxj2d6s           # external-contraction (2dawn+6spirit)
-    rules-wei-qi-ying-xue   # warm-disease depth staging
-    rules-sanjiao           # warm-disease spatial staging
-    rules-zj                # 12 point selection methods
-    rules-ziwu-liuzhu       # chronoacupuncture (ziwu liuzhu)
+    rules-fxj5z                 # five-organ supplement/drain
+    rules-fxj1xz                # heart-spirit virtual organ
+    rules-fxj2d6s               # external-contraction (2dawn+6spirit)
+    rules-wei-qi-ying-xue       # warm-disease depth staging
+    rules-sanjiao               # warm-disease spatial staging
+    rules-zj                    # 12 point selection methods
+    rules-ziwu-liuzhu           # chronoacupuncture (ziwu liuzhu)
 
   ↓ symlinks to archive
 
 Data Layer (read-only, symlinked per session)
-  fxj-zhengzhuang.md        # symptom baseline data
-  fxj-maixiang.md            # pulse diagnosis reference data (27 pulses)
-  shanghan-liujing.md        # six-channel to formula mapping
-  wenbing-wei-qi-ying-xue.md # warm-disease four-level staging data
-  wenbing-sanjiao.md         # warm-disease three-burner data
-  zj-12zj-*.md              # 12 regular meridian acupoints
-  zj-qj8m-*.md              # 8 extraordinary meridian points
+  fxj-zhengzhuang.md            # symptom baseline data
+  fxj-maixiang.md               # pulse diagnosis reference data (27 pulses)
+  shanghan-liujing.md           # six-channel to formula mapping
+  wenbing-wei-qi-ying-xue.md    # warm-disease four-level staging data
+  wenbing-sanjiao.md            # warm-disease three-burner data
+  zj-12zj-*.md                  # 12 regular meridian acupoints
+  zj-qj8m-*.md                  # 8 extraordinary meridian points
 ```
 
 ### Agent Layer
@@ -166,6 +168,7 @@ Skills are pure domain knowledge files with no routing logic or workflow orchest
 ## Prerequisites
 
 - [OpenCode](https://opencode.ai) with [oh-my-openagent](https://github.com/code-yeongyu/oh-my-openagent) installed
+- Python 3 (for local development server, optional)
 
 ## Installation
 
@@ -187,6 +190,12 @@ This creates symlinks for all `omtp-*` skills to `~/.config/opencode/skills/` an
 ```
 
 Removes all `omtp-*` symlinks from `~/.config/opencode/skills/`, `~/.config/opencode/agents/`, and `~/.claude/agents/`.
+
+## Web Frontend
+
+The `frontend/` directory contains a single-file web consultation interface that connects to OpenCode's HTTP API. Users submit symptoms through an interactive questionnaire, and the system dispatches TCM analysis agents and streams results back in real time.
+
+See **[frontend/README.md](frontend/README.md)** for setup instructions, network configuration, and detailed usage notes. ([中文版](frontend/README_zh.md))
 
 ## Usage
 
@@ -273,6 +282,11 @@ oh-my-tcmpowers/
 │   └── zj-qj8m-*.md                            # 8 extraordinary meridian acupoint data files
 ├── docs/
 │   └── YYMMDD-hhmmss/                          # Analysis archives (input, process, results)
+├── frontend/
+│   ├── index.html                              # Web consultation interface (single-file HTML+CSS+JS)
+│   ├── wenzhendan.json                          # Questionnaire data (19 symptom categories)
+│   ├── README.md                               # Frontend documentation (English)
+│   └── README_zh.md                            # Frontend documentation (Chinese)
 └── skills/
     ├── omtp-core-fxj/                           # Core theory (five-phase, ti-yong-hua, 60 medicinals, synthesized hua-flavor)
     ├── omtp-core-zj/                            # Acupuncture core theory (meridian attribution, five-shu-point properties)
@@ -291,7 +305,7 @@ oh-my-tcmpowers/
 
 ## Coexistence with Other Skills
 
-Oh My TCM Powers is completely independent of other skill sets. All skills are prefixed with `omtp-` and installed via symlinks, ensuring no interference with coding skills (Superpowers) or writing skills (Dreampowers).
+Oh My TCM Powers (中医之心) is completely independent of other skill sets. All skills are prefixed with `omtp-` and installed via symlinks, ensuring no interference with coding skills (Superpowers) or writing skills (Dreampowers).
 
 ## Classical Text References
 
