@@ -1,6 +1,6 @@
 ---
 name: omtp-core-zj
-description: Use when analyzing acupuncture point combinations, deducing meridian-organ relationships, or reasoning about five-phase acupoint selection
+description: "针灸理论/经络/穴位配伍/五输穴 - Core theory for analyzing acupuncture point combinations, meridian-organ relationships, five-phase acupoint selection"
 ---
 
 # 针灸五行五脏核心

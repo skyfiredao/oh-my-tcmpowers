@@ -1,6 +1,6 @@
 ---
 name: omtp-rules-fxj2d6s
-description: Use when analyzing external-contraction formulas (erldan liushen) from the Fuxingjue system - contains the two dawn (erldan) and six spirit (liushen) formula rules, six directional positions, and herb-symptom fitting for 16 classical formulas
+description: "二旦六神/外感方/感冒/伤寒/表证 - Analyze external-contraction formulas (erldan liushen): six directional positions, herb-symptom fitting for 16 classical formulas"
 ---
 
 # 辅行诀外感方二旦六神规则

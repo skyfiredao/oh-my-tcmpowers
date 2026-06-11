@@ -1,6 +1,6 @@
 ---
 name: omtp-analyze-zhenjiu
-description: Use when analyzing acupuncture point combinations to deduce therapeutic targets through meridian-organ relationships and 12 classical point selection methods
+description: "针灸/穴位/取穴/扎针/艾灸/经络/腧穴 - Analyze acupuncture point combinations to deduce therapeutic targets through meridian-organ relationships and 12 classical point selection methods"
 ---
 
 # 针灸配穴分析

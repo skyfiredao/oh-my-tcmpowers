@@ -4,15 +4,15 @@
 
 **[中文文档](README_zh.md)**
 
-An AI skill set + agent orchestration layer for **analyzing Traditional Chinese Medicine (TCM) formulas, symptoms, pulse patterns, and acupoints** through the *Fuxingjue* (辅行诀) five-phase (wuxing) framework. 3 agents handle entry routing, context isolation, and parallel dispatch; 14 specialized skills provide pure domain knowledge covering core theory, formula composition rules, acupuncture point selection rules, pulse diagnosis, and analysis methods. Symptom analysis simultaneously derives herbal formulas and acupuncture point combinations, forming dual-path cross-validation; pulse diagnosis provides an independent reverse-validation channel.
+An AI skill set + agent orchestration layer for **analyzing Traditional Chinese Medicine (TCM) formulas, symptoms, pulse patterns, and acupoints** through multiple classical frameworks. 5 agents handle entry routing, context isolation, and parallel dispatch; 18 specialized skills provide pure domain knowledge covering core theory, formula composition rules, acupuncture point selection rules, pulse diagnosis, and analysis methods. Symptom analysis simultaneously derives herbal formulas (Fuxingjue), circular-motion prescriptions (Yuanyundong), Bianzhenglu diagnostic-reversal prescriptions (辨证录), and acupuncture point combinations, forming quad-path cross-validation; pulse diagnosis provides an independent reverse-validation channel.
 
 ## What It Does
 
 Oh My TCM Powers (中医之心) provides a structured, rule-driven framework for analyzing herbal formulas, acupoint combinations, and clinical symptoms using the *Fuxingjue* theory system. It deduces therapeutic mechanisms through five-phase relationships, ti-yong-hua (body-function-transformation) layering, and quantified composition rules.
 
-- **3 agents + 14 skills**: agents handle routing and orchestration, skills provide pure domain knowledge
+- **5 agents + 18 skills**: agents handle routing and orchestration, skills provide pure domain knowledge
 - **Three-layer architecture**: agent (routing/orchestration/archive) → skill (core theory/rules/analysis methods) → data (herb tables/acupoint tables/symptom data)
-- **Parallel dual-path analysis**: symptom analysis simultaneously derives herbal formula and acupuncture point combination, with convergence and divergence comparison
+- **Parallel quad-path analysis**: symptom analysis simultaneously derives Fuxingjue herbal formula, Yuanyundong circular-motion prescription, Bianzhenglu diagnostic-reversal prescription, and acupuncture point combination, with convergence and divergence comparison
 - **Bidirectional analysis**: formula→symptom and symptom→formula, cross-validating each other
 - **Five-phase mutual containment table**: 60 medicinals (25 herbal + 30 mineral + 5 supplementary) mapped to 25 positions in a 5×5 matrix
 - **10-position ti-yong expansion sequence**: cyclic mapping of body (ti) and function (yong) flavors across five phases
@@ -26,6 +26,7 @@ Oh My TCM Powers (中医之心) provides a structured, rule-driven framework for
 - **Six-channel (liujing) pattern differentiation**: six-channel theory integrated into acupuncture core, with channel-to-formula mapping for Shanghan (cold-damage) staging
 - **Wei-Qi-Ying-Xue (defense-qi-nutrient-blood) staging**: four-level warm-disease depth staging framework for diagnostic differentiation (pure diagnostic tool, independent of formula selection)
 - **Sanjiao (triple-burner) staging**: three-burner warm-disease spatial staging framework for diagnostic differentiation (pure diagnostic tool, independent of formula selection)
+- **Yuanyundong (circular motion) subsystem**: Peng Ziyi's ascending-descending-floating-sinking model with 8 pathological types (+ subtypes), 15 compound types, 10 prescription rule types, and ~120 medicinals classified by qi-dynamic function
 - **Acupuncture subsystem**: 3 additional skills for meridian-organ analysis and acupoint selection using 12 classical point selection methods
 - **20 acupoint data files**: 12 regular meridians + 8 extraordinary meridians with point names, five-phase attributes, and special point classifications
 - **Pulse diagnosis (maizhen) module**: 27-pulse classification system based on Wang Shuhe's *Maijing* and Li Shizhen's *Binhu Maixue*, providing reverse-validation of symptom-based diagnosis through pulse-to-organ-pathology mapping
@@ -36,7 +37,9 @@ Oh My TCM Powers (中医之心) provides a structured, rule-driven framework for
 | Agent | Role |
 |---|---|
 | `omtp-agent-BianQue`（扁鹊） | General practitioner, strongest in diagnosis. Entry routing, dispatch, archive management, result summary |
-| `omtp-agent-TaoHongJing`（陶弘景） | Herbal medicine expert. Loads core-fxj, routes to rule branch, executes complete derivation chain |
+| `omtp-agent-TaoHongJing`（陶弘景） | Herbal medicine expert (Fuxingjue). Loads core-fxj, routes to rule branch, executes complete derivation chain |
+| `omtp-agent-PengZiYi`（彭子益） | Circular-motion expert (Yuanyundong). Staged loading: core-yyd → bianshi (identification), then rules-yyd → zufang → yaoxing (prescription). Independently analyzes symptoms through ascending-descending model, derives prescriptions |
+| `omtp-agent-ChenShiDuo`（陈士铎） | Bianzhenglu expert (辨证录). Loads core-bzl → rules-bzl, "似X非X" diagnostic reversal method, bu-fa dominant prescriptions with fan-zuo (反佐) and large-dose multi-organ coordination |
 | `omtp-agent-HuangFuMi`（皇甫谧） | Acupuncture expert. Loads core-zj + rules-zj + rules-ziwu-liuzhu, organ-to-meridian mapping, 12-method point selection + chronoacupuncture |
 
 ## Skill Overview
@@ -46,6 +49,8 @@ Oh My TCM Powers (中医之心) provides a structured, rule-driven framework for
 | Skill | Purpose |
 |---|---|
 | `omtp-core-fxj` | Core theory: five-phase relationships, organ-flavor mapping, ti-yong-hua structure, 10-position expansion sequence, 60-medicinal mutual containment table, synthesized hua-flavor rules |
+| `omtp-core-yyd` | Circular-motion core theory framework: Peng Ziyi's ascending-descending-floating-sinking model, central-qi pivot, 8-type summary table (detailed identification data in data/yyd-bianshi.md) |
+| `omtp-core-bzl` | Bianzhenglu (辨证录) methodology: 论→辨→治→方 four-step chain, "似X非X" diagnostic reversal, 126-men routing table |
 
 ### Rule Layer (loaded by agents based on analysis results)
 
@@ -56,6 +61,8 @@ Oh My TCM Powers (中医之心) provides a structured, rule-driven framework for
 | `omtp-rules-fxj2d6s` | External-contraction formula rules: two-dawn (erldan) and six-spirit (liushen) formulas, six directional positions, herb-symptom fitting for 16 classical formulas |
 | `omtp-rules-wei-qi-ying-xue` | Wei-Qi-Ying-Xue (defense-qi-nutrient-blood) warm-disease staging: four-level diagnostic staging framework for warm-disease depth differentiation |
 | `omtp-rules-sanjiao` | Sanjiao (triple-burner) warm-disease staging: three-burner diagnostic staging framework for warm-disease spatial differentiation |
+| `omtp-rules-yyd` | Yuanyundong (circular motion) prescription rule framework: 3 composition principles, 3-layer structure, 10-type summary, dosage ratio principles (detailed prescription data in data/yyd-zufang.md) |
+| `omtp-rules-bzl` | Bianzhenglu (辨证录) prescription rules: bu-fa dominant, fan-zuo (反佐) pairing, large-dose strategy, multi-organ coordination, 3-level fallback (exact match → adapt → framework derive) |
 
 ### Analysis Method Layer (loaded by agents, providing domain methods without routing logic)
 
@@ -93,7 +100,9 @@ User Input
   ↓
 Agent Layer (routing + orchestration + archive)
   BianQue (扁鹊)                 # general practitioner, diagnosis, dispatch, summary
-    ├── TaoHongJing (陶弘景)     # herbal medicine expert
+    ├── TaoHongJing (陶弘景)     # herbal medicine expert (Fuxingjue)
+    ├── PengZiYi (彭子益)         # circular-motion expert (Yuanyundong)
+    ├── ChenShiDuo (陈士铎)       # Bianzhenglu expert (辨证录)
     └── HuangFuMi (皇甫谧)       # acupuncture expert
 
   ↓ loads
@@ -108,6 +117,8 @@ Skill Layer (pure domain knowledge, no routing)
 
   Core Theory
     core-fxj                    # five-phase, ti-yong-hua, 60 herbs
+    core-yyd                    # circular motion, ascending-descending model
+    core-bzl                    # Bianzhenglu, 126-men routing
     core-zj                     # meridians, five-shu-points
 
   Rules
@@ -116,6 +127,8 @@ Skill Layer (pure domain knowledge, no routing)
     rules-fxj2d6s               # external-contraction (2dawn+6spirit)
     rules-wei-qi-ying-xue       # warm-disease depth staging
     rules-sanjiao               # warm-disease spatial staging
+    rules-yyd                   # circular-motion prescriptions
+    rules-bzl                   # Bianzhenglu prescriptions (bu-fa + fan-zuo)
     rules-zj                    # 12 point selection methods
     rules-ziwu-liuzhu           # chronoacupuncture (ziwu liuzhu)
 
@@ -127,6 +140,10 @@ Data Layer (read-only, symlinked per session)
   shanghan-liujing.md           # six-channel to formula mapping
   wenbing-wei-qi-ying-xue.md    # warm-disease four-level staging data
   wenbing-sanjiao.md            # warm-disease three-burner data
+  yyd-bianshi.md                # circular-motion identification data (8 types + subtypes + differentials + compound types)
+  yyd-zufang.md                 # circular-motion prescription data (10 type treatments + compound templates)
+  yyd-yaoxing.md                # circular-motion medicinal classification (~120 herbs)
+  bzl/*.md                      # Bianzhenglu 126-men case data (per-men files)
   zj-12zj-*.md                  # 12 regular meridian acupoints
   zj-qj8m-*.md                  # 8 extraordinary meridian points
 ```
@@ -138,10 +155,12 @@ Agent definitions are platform-agnostic Markdown files describing roles, skill l
 | Agent | Responsibility |
 |---|---|
 | `omtp-agent-BianQue`（扁鹊） | General practitioner, strongest in diagnosis. Determines entry type by **input format**, creates archive, dispatches experts, summarizes results |
-| `omtp-agent-TaoHongJing`（陶弘景） | Herbal medicine expert: loads core-fxj, routes to one rule branch (fxj5z/fxj1xz/fxj2d6s), executes derivation chain |
+| `omtp-agent-TaoHongJing`（陶弘景） | Herbal medicine expert (Fuxingjue): loads core-fxj, routes to one rule branch (fxj5z/fxj1xz/fxj2d6s), executes derivation chain |
+| `omtp-agent-PengZiYi`（彭子益） | Circular-motion expert (Yuanyundong): staged loading core-yyd → bianshi → rules-yyd → zufang → yaoxing, independently analyzes symptoms through ascending-descending model |
+| `omtp-agent-ChenShiDuo`（陈士铎） | Bianzhenglu expert (辨证录): loads core-bzl → rules-bzl, "似X非X" diagnostic reversal, bu-fa dominant with fan-zuo and large-dose multi-organ coordination |
 | `omtp-agent-HuangFuMi`（皇甫谧） | Acupuncture expert: loads core-zj + rules-zj + rules-ziwu-liuzhu, organ-to-meridian mapping, 12-method point selection + chronoacupuncture |
 
-Context isolation: omtp-agent-TaoHongJing is prohibited from loading any zj-related resources; omtp-agent-HuangFuMi is prohibited from loading any fxj-related resources. The two experts complete their derivations independently, and the router collects and cross-checks their conclusions.
+Context isolation: Each expert agent is prohibited from loading resources belonging to other experts. TaoHongJing, PengZiYi, ChenShiDuo, and HuangFuMi complete their derivations independently, and the router collects and cross-checks their conclusions.
 
 ### Routing Design
 
@@ -149,7 +168,7 @@ Three entry points, routed by input format (not content-driven):
 
 | Entry | Trigger | Dispatch |
 |---|---|---|
-| **zhengzhuang (symptom)** | Chief complaint, symptom descriptions, illness narrative | Generate shared analysis contract, then dispatch TaoHongJing + HuangFuMi **in parallel** |
+| **zhengzhuang (symptom)** | Chief complaint, symptom descriptions, illness narrative | Generate shared analysis contract, then dispatch TaoHongJing + PengZiYi + ChenShiDuo + HuangFuMi **in parallel** |
 | **fangji (formula)** | Herb name list, dosages, preparation instructions | **Single-path** to TaoHongJing |
 | **zhenjiu (acupoint)** | Acupoint name list, point combinations | **Single-path** to HuangFuMi |
 
@@ -225,9 +244,11 @@ User Input (symptoms)
   → BianQue
       1. load analyze-zhengzhuang (extract symptoms, map to organs)
       2. parallel dispatch:
-         → TaoHongJing (herbal formula derivation)
+         → TaoHongJing (Fuxingjue herbal formula derivation)
+         → PengZiYi   (circular-motion prescription derivation)
+         → ChenShiDuo (Bianzhenglu diagnostic-reversal derivation)
          → HuangFuMi   (acupoint combination derivation)
-      3. convergence check: compare therapeutic targets from both paths
+      3. convergence check: compare therapeutic targets from all four paths
 ```
 
 ### Analyzing Acupoint Combinations
@@ -270,37 +291,47 @@ oh-my-tcmpowers/
 ├── README_zh.md                                # Chinese documentation
 ├── agents/
 │   ├── omtp-agent-BianQue.md                   # BianQue (扁鹊) general practitioner + diagnosis + routing
-│   ├── omtp-agent-TaoHongJing.md               # TaoHongJing (陶弘景) herbal medicine expert
+│   ├── omtp-agent-TaoHongJing.md               # TaoHongJing (陶弘景) herbal medicine expert (Fuxingjue)
+│   ├── omtp-agent-PengZiYi.md                  # PengZiYi (彭子益) circular-motion expert (Yuanyundong)
+│   ├── omtp-agent-ChenShiDuo.md                # ChenShiDuo (陈士铎) Bianzhenglu expert (辨证录)
 │   └── omtp-agent-HuangFuMi.md                 # HuangFuMi (皇甫谧) acupuncture expert
 ├── data/
 │   ├── fxj-zhengzhuang.md                      # Symptom analysis baseline data
-│   ├── fxj-maixiang.md                          # Pulse diagnosis reference data (27 pulses)
-│   ├── shanghan-liujing.md                      # Six-channel to erldan-liushen formula mapping
-│   ├── wenbing-wei-qi-ying-xue.md               # Warm-disease four-level staging data
-│   ├── wenbing-sanjiao.md                       # Warm-disease three-burner staging data
+│   ├── fxj-maixiang.md                         # Pulse diagnosis reference data (27 pulses)
+│   ├── shanghan-liujing.md                     # Six-channel to erldan-liushen formula mapping
+│   ├── wenbing-wei-qi-ying-xue.md              # Warm-disease four-level staging data
+│   ├── wenbing-sanjiao.md                      # Warm-disease three-burner staging data
+│   ├── yyd-bianshi.md                          # Circular-motion identification data (8 types + subtypes + differentials + compound types)
+│   ├── yyd-zufang.md                           # Circular-motion prescription data (10 type treatments + compound templates)
+│   ├── yyd-yaoxing.md                          # Circular-motion medicinal classification (~120 herbs)
+│   ├── bzl/                                    # Bianzhenglu 辨证录 case data (126-men, per-men files)
 │   ├── zj-12zj-*.md                            # 12 regular meridian acupoint data files
 │   └── zj-qj8m-*.md                            # 8 extraordinary meridian acupoint data files
 ├── docs/
 │   └── YYMMDD-hhmmss/                          # Analysis archives (input, process, results)
 ├── frontend/
 │   ├── index.html                              # Web consultation interface (single-file HTML+CSS+JS)
-│   ├── wenzhendan.json                          # Questionnaire data (19 symptom categories)
+│   ├── wenzhendan.json                         # Questionnaire data (19 symptom categories)
 │   ├── README.md                               # Frontend documentation (English)
 │   └── README_zh.md                            # Frontend documentation (Chinese)
 └── skills/
-    ├── omtp-core-fxj/                           # Core theory (five-phase, ti-yong-hua, 60 medicinals, synthesized hua-flavor)
-    ├── omtp-core-zj/                            # Acupuncture core theory (meridian attribution, five-shu-point properties)
-    ├── omtp-rules-fxj5z/                        # Five-organ supplement/drain rules
-    ├── omtp-rules-fxj1xz/                       # Heart-spirit virtual organ rules
-    ├── omtp-rules-fxj2d6s/                      # External-contraction formula rules (two-dawn + six-spirit)
-    ├── omtp-rules-wei-qi-ying-xue/              # Warm-disease depth staging rules (wei-qi-ying-xue)
-    ├── omtp-rules-sanjiao/                      # Warm-disease spatial staging rules (triple-burner)
-    ├── omtp-rules-zj/                           # Acupoint selection rules (12 methods)
-    ├── omtp-rules-ziwu-liuzhu/                  # Chronoacupuncture point selection (ziwu liuzhu four methods)
-    ├── omtp-analyze-fangji/                     # Herb positioning + whole-formula statistical methods
-    ├── omtp-analyze-zhengzhuang/                # Symptom extraction + organ mapping methods
-    ├── omtp-analyze-maizhen/                    # Pulse diagnosis + cross-validation methods
-    └── omtp-analyze-zhenjiu/                    # Acupoint analysis + point selection method matching
+    ├── omtp-core-fxj/                          # Core theory (five-phase, ti-yong-hua, 60 medicinals, synthesized hua-flavor)
+    ├── omtp-core-yyd/                          # Circular-motion core theory framework (ascending-descending model, central-qi pivot, 8-type summary)
+    ├── omtp-core-bzl/                          # Bianzhenglu methodology (论→辨→治→方, 126-men routing)
+    ├── omtp-core-zj/                           # Acupuncture core theory (meridian attribution, five-shu-point properties)
+    ├── omtp-rules-fxj5z/                       # Five-organ supplement/drain rules
+    ├── omtp-rules-fxj1xz/                      # Heart-spirit virtual organ rules
+    ├── omtp-rules-fxj2d6s/                     # External-contraction formula rules (two-dawn + six-spirit)
+    ├── omtp-rules-wei-qi-ying-xue/             # Warm-disease depth staging rules (wei-qi-ying-xue)
+    ├── omtp-rules-sanjiao/                     # Warm-disease spatial staging rules (triple-burner)
+    ├── omtp-rules-yyd/                         # Circular-motion prescription rule framework (3 principles + 3-layer structure + 10-type summary)
+    ├── omtp-rules-bzl/                         # Bianzhenglu prescription rules (bu-fa + fan-zuo + large-dose + multi-organ)
+    ├── omtp-rules-zj/                          # Acupoint selection rules (12 methods)
+    ├── omtp-rules-ziwu-liuzhu/                 # Chronoacupuncture point selection (ziwu liuzhu four methods)
+    ├── omtp-analyze-fangji/                    # Herb positioning + whole-formula statistical methods
+    ├── omtp-analyze-zhengzhuang/               # Symptom extraction + organ mapping methods
+    ├── omtp-analyze-maizhen/                   # Pulse diagnosis + cross-validation methods
+    └── omtp-analyze-zhenjiu/                   # Acupoint analysis + point selection method matching
 ```
 
 ## Coexistence with Other Skills
@@ -318,6 +349,8 @@ The system references the following classical texts:
 | 《伤寒论》(*Shanghan Lun*) | 张仲景 (Zhang Zhongjing) | Han (汉) | Six-channel (六经) pattern differentiation: stage definitions, transmission models, channel-formula correspondence |
 | 《温热论》(*Wenre Lun*) | 叶天士 (Ye Tianshi) | Qing (清) | Wei-Qi-Ying-Xue four-level staging system for warm diseases |
 | 《温病条辨》(*Wenbing Tiaobian*) | 吴鞠通 (Wu Jutong) | Qing (清) | Triple-burner (三焦) spatial staging system for warm diseases |
+| 《圆运动的古中医学》(*Yuanyundong de Gu Zhongyixue*) | 彭子益 (Peng Ziyi) | Republic (民国) | Circular-motion ascending-descending model, central-qi pivot theory, 8 pathological types, medicinal classification by qi-dynamic function |
+| 《辨证录》(*Bianzhenglu*) | 陈士铎 (Chen Shiduo) | Qing (清) | 14-volume, 126-men diagnostic-reversal system: "似X非X" differentiation, bu-fa dominant prescriptions, fan-zuo pairing, large-dose multi-organ coordination |
 
 ## License
 

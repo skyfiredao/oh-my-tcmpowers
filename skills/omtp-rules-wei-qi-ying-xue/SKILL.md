@@ -1,6 +1,6 @@
 ---
 name: omtp-rules-wei-qi-ying-xue
-description: Use when staging warm-disease (wenbing) progression through the four-level wei-qi-ying-xue framework to identify disease depth as a diagnostic dimension
+description: "卫气营血/温病/热病/传变 - Stage warm-disease progression through four-level wei-qi-ying-xue framework to identify disease depth"
 ---
 
 # 温病卫气营血辨证规则

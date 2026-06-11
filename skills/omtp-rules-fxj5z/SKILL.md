@@ -1,6 +1,6 @@
 ---
 name: omtp-rules-fxj5z
-description: Use when applying five-organ (wuzang) supplement/drain formula rules in the Fuxingjue system - contains formula composition rules, dosage patterns, and cross-phase pairings for the five solid organs
+description: "五脏补泻/辅行诀五脏方/脏腑用药 - Apply five-organ (wuzang) supplement/drain formula rules: composition, dosage patterns, cross-phase pairings for five solid organs"
 ---
 
 # 辅行诀五脏补泻规则

@@ -1,6 +1,6 @@
 ---
 name: omtp-analyze-maizhen
-description: Use when analyzing pulse descriptions to deduce organ-pathology conclusions and cross-validate against symptom-based diagnosis through the Fuxingjue five-phase framework
+description: "脉诊/把脉/脉象/切脉/诊脉 - Analyze pulse descriptions to deduce organ-pathology conclusions and cross-validate against symptom-based diagnosis through Fuxingjue framework"
 ---
 
 # 辅行诀脉象分析

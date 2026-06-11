@@ -163,6 +163,7 @@ ln -s ../../data/zj-12zj-shou-taiyin-fei.md docs/YYMMDD-hhmmss/zj-12zj-shou-taiy
 3. 推导链若无法闭环：必须显式标记"不确定段"并给出补证方向。
 4. 禁止覆盖上游 immutable 输入文件。
 5. 禁止引用 fxj 规则补全 zj 推理。
+6. **出处强制标注**：每个取穴必须标注所用取穴法编号（①-⑫）和依据（如"omtp-rules-zj·子母补泻法·脾经土穴"）；穴位五行属性必须标注 data 文件来源（如"data/zj-12zj-foot-taiyin.md·太白·五行=土"）。无法标注出处的取穴必须标为"临床经验取穴"并说明理由。
 
 ## 最小执行清单（omtp-agent-HuangFuMi 自检）
 1. 识别入口类型并读取正确输入文件。

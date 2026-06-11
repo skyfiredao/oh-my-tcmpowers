@@ -100,7 +100,15 @@ else
     echo "未检测到 oh-my-openagent 插件，跳过 ~/.claude/agents/ 安装。"
 fi
 
-# --- 4. JSON 配置提示 ---
+# --- 4. 刷新 Skill 缓存提示 ---
+echo ""
+echo "=== 刷新 Skill 缓存 ==="
+echo "  OpenCode 在启动时扫描 skill 目录并缓存。"
+echo "  如果 opencode serve 正在运行，请手动重启以加载新安装的 skill："
+echo "    killall opencode && opencode serve"
+echo "  如果使用 opencode CLI 模式，下次启动时新 skill 会自动生效。"
+
+# --- 5. JSON 配置提示 ---
 echo ""
 echo "=== Agent 模型配置 ==="
 echo "Agent 默认使用 OpenCode 全局模型。如需为 agent 指定不同模型:"

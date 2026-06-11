@@ -1,6 +1,6 @@
 ---
 name: omtp-rules-sanjiao
-description: Use when staging warm-disease (wenbing) progression through the three-burner (sanjiao) framework to identify horizontal disease location as a diagnostic dimension
+description: "三焦辨证/温病/上焦中焦下焦 - Stage warm-disease (wenbing) progression through three-burner (sanjiao) framework to identify horizontal disease location"
 ---
 
 # 温病三焦辨证规则

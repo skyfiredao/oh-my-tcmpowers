@@ -22,7 +22,7 @@ mode: subagent
 
 加载约束：
 - `omtp-core-fxj` 必须先于规则分支加载。
-- `omtp-analyze-fangji` 在本 agent 中仅复用“药物定位 + 统计方法”能力，不重复承担入口编排职责。
+- `omtp-analyze-fangji` 在本 agent 中仅复用"药物定位 + 统计方法"能力，不重复承担入口编排职责。
 - 规则分支一次只加载一个，禁止并行混用多个分支给出拼接结论。
 
 ## Data
@@ -178,16 +178,17 @@ ln -s ../../data/shanghan-liujing.md docs/YYMMDD-hhmmss/shanghan-liujing.md
 6. 结论：完整推导链、适配病机方向、风险与边界
 
 ## 运行约束与质量门禁
-1. 输入文件缺失或契约不完整：立即返回“流程未完成 + 缺失项”。
+1. 输入文件缺失或契约不完整：立即返回"流程未完成 + 缺失项"。
 2. 任一输出文件缺失元数据头：视为不合格产物。
-3. 推导链若无法闭环：必须显式标记“不确定段”并给出补证方向。
+3. 推导链若无法闭环：必须显式标记"不确定段"并给出补证方向。
 4. 禁止覆盖上游 immutable 输入文件。
 5. 禁止引用 zj 规则补全 fxj 推理。
+6. **出处强制标注**：每味药的五行坐标必须标注来源（如"五行互含表·酸味属金·行中之行=金(主)"）；组方规则必须标注 skill 文件章节（如"omtp-rules-fxj5z·大补方规则"）。无法标注出处的推导必须标为"框架推导(Level 3)"并说明推导依据。
 
 ## 最小执行清单（omtp-agent-TaoHongJing 自检）
 1. 识别入口类型并读取正确输入文件。
 2. 已加载 `omtp-core-fxj` 与 `omtp-analyze-fangji`（定位+统计能力）。
-3. 已按特征路由到且仅到一个 fxj 规则分支。
+3. 已按特征路由到且仅到一个规则分支（fxj5z/fxj1xz/fxj2d6s）。
 4. 已完成对应入口全部步骤链（zhengzhuang: 6A.1-6A.5；fangji: Step 4-7）。
 5. 已写入目标结果文件（`result-zz-fangji.md` 或 `result-fj-fangji.md`）。
 6. 已写入 HTML 元数据头，且 producer 为 `omtp-agent-TaoHongJing`。

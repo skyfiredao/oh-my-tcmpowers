@@ -1,6 +1,6 @@
 ---
 name: omtp-rules-zj
-description: Use when selecting acupoint combinations for treatment - contains 12 point selection methods including five-shu-point selection, mother-child tonification/sedation, interior-exterior pairing, yuan-luo pairing, shu-mu pairing, xi-cleft points, eight influential points, lower he-sea points, four/eight general points, miu-ci cross needling, meeting point selection, and general selection principles, plus a chronoacupuncture module
+description: "取穴配方/选穴/穴位处方/针灸配穴 - Select acupoint combinations: 12 methods including five-shu-point, mother-child, interior-exterior, yuan-luo, shu-mu pairing, xi-cleft, eight influential, lower he-sea, general points, miu-ci, meeting points, plus chronoacupuncture"
 ---
 
 # 针灸取穴规则

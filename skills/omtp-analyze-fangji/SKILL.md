@@ -1,6 +1,6 @@
 ---
 name: omtp-analyze-fangji
-description: Use when performing five-phase structural analysis on a herbal formula - locates each herb in the five-phase mutual containment matrix and produces whole-formula statistics
+description: "方剂分析/药方/处方/组方/配伍 - Perform five-phase structural analysis on herbal formula: locate each herb in mutual containment matrix, produce whole-formula statistics"
 ---
 
 # 辅行诀方剂分析

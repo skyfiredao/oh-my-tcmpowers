@@ -1,6 +1,6 @@
 ---
 name: omtp-rules-ziwu-liuzhu
-description: Use when selecting acupuncture points based on chronotherapy (子午流注) - contains four time-based point selection methods with deterministic calculation algorithms for 纳子法, 纳甲法, 灵龟八法, and 飞腾八法, given any date and time input
+description: "子午流注/时间针灸/纳子法/纳甲法/灵龟八法/飞腾八法 - Select acupuncture points based on chronotherapy with deterministic calculation algorithms"
 ---
 
 # 子午流注取穴法

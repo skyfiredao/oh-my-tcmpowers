@@ -1,6 +1,6 @@
 ---
 name: omtp-core-fxj
-description: Use when analyzing herbal formulas, deducing five-phase (wuxing) relationships, or reasoning about organ-flavor interactions in the Fuxingjue system - core theory shared by all branch rules
+description: "辅行诀/五行/五味/脏腑/中药理论 - Core theory for analyzing herbal formulas, five-phase (wuxing) relationships, organ-flavor interactions in the Fuxingjue system"
 ---
 
 # 辅行诀五行五味五脏核心

@@ -1,6 +1,6 @@
 ---
 name: omtp-analyze-zhengzhuang
-description: Use when analyzing symptoms to deduce the affected organ and pathological layer through the Fuxingjue five-phase framework
+description: "症状分析/辨证/看病/诊断/病症/不舒服 - MUST USE when analyzing 症状/symptoms to deduce affected organ and pathological layer through Fuxingjue five-phase framework"
 ---
 
 # 辅行诀辨症分析
@@ -53,6 +53,20 @@ description: Use when analyzing symptoms to deduce the affected organ and pathol
 
 显性证据不可被推导或生克链推翻。
 
+**显性证据硬门槛（CRITICAL）**：
+
+仅以下两种情况可标注为"显性"：
+1. 症状原文**字面包含**脏腑名称或其经文专属代称（如"心中"、"胁下"、"腰"、"少腹"）
+2. 症状在 `fxj-zhengzhuang.md` 经文核心症状群表中**作为该脏的独占性症状**出现（非共享症状）
+
+**禁止升级为显性的常见错误**：
+- "颈背酸胀"≠"腰痛"→ 颈背非肾之专属部位，不得标显性，应归第三级推导
+- "口苦"→ 辅行诀经文无"口苦归肝胆"的直接记载，不得标显性，应归第三级推导
+- "眼花"→ 虽"肝开窍于目"但非经文点名，应归第三级推导
+- 部位相邻或功能相关均不构成显性证据，必须是**原文字面匹配**
+
+遇到边界情况时，宁可降级为第三级推导（标注推导依据），不可错误升级为显性。
+
 ### 第二级：经文锚点匹配
 
 读取档案目录中 `fxj-zhengzhuang.md` 中"经文核心症状群"表，将输入症状与各脏核心症状逐条比对。命中标注"锚点"。该表中"虚证补充"列的症状在锚点命中时同时提示虚证方向，可辅助第八步体用化判断。
@@ -73,6 +87,8 @@ description: Use when analyzing symptoms to deduce the affected organ and pathol
 4. **部位归属**：肝主筋/目/胁、心主脉/舌/面、脾主肉/口/腹、肺主皮毛/鼻/胸、肾主骨/耳/腰
 
 动态推导必须展示推导依据。标注"推导"。
+
+**出处标注要求（CRITICAL）**：每条映射必须标注证据来源——显性标注原文关键词，锚点标注 `fxj-zhengzhuang.md` 对应行号或表格条目，推导标注所用的推导依据编号（1-4中的哪条）。无法标注出处的映射不得标为显性或锚点。
 
 每条症状可能指向一个或多个脏腑。
 

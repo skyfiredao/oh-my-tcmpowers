@@ -1,6 +1,6 @@
 ---
 name: omtp-rules-fxj1xz
-description: Use when analyzing heart-spirit (xinshen) formulas - the virtual organ independent of five phases, with inverted supplement/drain logic, solvent participation, and unique formula structures
+description: "心神方/安神/失眠/心悸/神志 - Analyze heart-spirit (xinshen) formulas: virtual organ independent of five phases, inverted supplement/drain logic, unique formula structures"
 ---
 
 # 辅行诀心神虚脏规则
