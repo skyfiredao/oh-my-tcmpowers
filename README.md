@@ -101,8 +101,8 @@ User Input
 Agent Layer (routing + orchestration + archive)
   BianQue (扁鹊)                 # general practitioner, diagnosis, dispatch, summary
     ├── TaoHongJing (陶弘景)     # herbal medicine expert (Fuxingjue)
-    ├── PengZiYi (彭子益)         # circular-motion expert (Yuanyundong)
-    ├── ChenShiDuo (陈士铎)       # Bianzhenglu expert (辨证录)
+    ├── PengZiYi (彭子益)        # circular-motion expert (Yuanyundong)
+    ├── ChenShiDuo (陈士铎)      # Bianzhenglu expert (辨证录)
     └── HuangFuMi (皇甫谧)       # acupuncture expert
 
   ↓ loads
@@ -137,13 +137,15 @@ Skill Layer (pure domain knowledge, no routing)
 Data Layer (read-only, symlinked per session)
   fxj-zhengzhuang.md            # symptom baseline data
   fxj-maixiang.md               # pulse diagnosis reference data (27 pulses)
+  maizhen-maijue.md             # ChenShiDuo pulse classic (compound pulse + position symptoms)
   shanghan-liujing.md           # six-channel to formula mapping
   wenbing-wei-qi-ying-xue.md    # warm-disease four-level staging data
   wenbing-sanjiao.md            # warm-disease three-burner data
   yyd-bianshi.md                # circular-motion identification data (8 types + subtypes + differentials + compound types)
-  yyd-zufang.md                 # circular-motion prescription data (10 type treatments + compound templates)
+  yyd-zufang/                   # circular-motion prescription data (per-disease files)
   yyd-yaoxing.md                # circular-motion medicinal classification (~120 herbs)
-  bzl/*.md                      # Bianzhenglu 126-men case data (per-men files)
+  bzl/                          # Bianzhenglu 125-men case data (per-men files + 凡例 + 序跋)
+  bencao/                       # Historical materia medica (340 herbs, per-herb files)
   zj-12zj-*.md                  # 12 regular meridian acupoints
   zj-qj8m-*.md                  # 8 extraordinary meridian points
 ```
@@ -298,13 +300,15 @@ oh-my-tcmpowers/
 ├── data/
 │   ├── fxj-zhengzhuang.md                      # Symptom analysis baseline data
 │   ├── fxj-maixiang.md                         # Pulse diagnosis reference data (27 pulses)
+│   ├── maizhen-maijue.md                       # ChenShiDuo pulse classic: compound pulse, position symptoms, prognosis
 │   ├── shanghan-liujing.md                     # Six-channel to erldan-liushen formula mapping
 │   ├── wenbing-wei-qi-ying-xue.md              # Warm-disease four-level staging data
 │   ├── wenbing-sanjiao.md                      # Warm-disease three-burner staging data
 │   ├── yyd-bianshi.md                          # Circular-motion identification data (8 types + subtypes + differentials + compound types)
-│   ├── yyd-zufang.md                           # Circular-motion prescription data (10 type treatments + compound templates)
+│   ├── yyd-zufang/                             # Circular-motion prescription data (per-disease files)
 │   ├── yyd-yaoxing.md                          # Circular-motion medicinal classification (~120 herbs)
-│   ├── bzl/                                    # Bianzhenglu 辨证录 case data (126-men, per-men files)
+│   ├── bzl/                                    # Bianzhenglu 辨证录 case data (125-men + 凡例 + 序跋)
+│   ├── bencao/                                 # Historical materia medica (340 herbs, per-herb files)
 │   ├── zj-12zj-*.md                            # 12 regular meridian acupoint data files
 │   └── zj-qj8m-*.md                            # 8 extraordinary meridian acupoint data files
 ├── docs/
@@ -350,7 +354,9 @@ The system references the following classical texts:
 | 《温热论》(*Wenre Lun*) | 叶天士 (Ye Tianshi) | Qing (清) | Wei-Qi-Ying-Xue four-level staging system for warm diseases |
 | 《温病条辨》(*Wenbing Tiaobian*) | 吴鞠通 (Wu Jutong) | Qing (清) | Triple-burner (三焦) spatial staging system for warm diseases |
 | 《圆运动的古中医学》(*Yuanyundong de Gu Zhongyixue*) | 彭子益 (Peng Ziyi) | Republic (民国) | Circular-motion ascending-descending model, central-qi pivot theory, 8 pathological types, medicinal classification by qi-dynamic function |
-| 《辨证录》(*Bianzhenglu*) | 陈士铎 (Chen Shiduo) | Qing (清) | 14-volume, 126-men diagnostic-reversal system: "似X非X" differentiation, bu-fa dominant prescriptions, fan-zuo pairing, large-dose multi-organ coordination |
+| 《辨证录》(*Bianzhenglu*) | 陈士铎 (Chen Shiduo) | Qing (清) | 14-volume, 125-men diagnostic-reversal system: "似X非X" differentiation, bu-fa dominant prescriptions, fan-zuo pairing, large-dose multi-organ coordination |
+| 《脉诀阐微》(*Maijue Chanwei*) | 陈士铎 (Chen Shiduo) | Qing (清) | Five-chapter pulse classic: 38-character pulse formula, compound pulse combination diagnosis, position×pulse→symptom mapping, life-death pulse prognosis |
+| 《历代本草药性汇解》 | 综合 (Multiple) | Various | Historical materia medica compilation: 340 herbs with性味归经 from multiple classical sources across dynasties |
 
 ## License
 

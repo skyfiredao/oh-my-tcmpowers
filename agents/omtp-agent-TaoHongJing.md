@@ -29,6 +29,14 @@ mode: subagent
 数据源（项目 `data/` 目录下）：
 - `fxj-zhengzhuang.md`（症状匹配基准数据）
 - `shanghan-liujing.md`（六经→二旦六神方对应表，六经辨证路径时使用）
+- `bencao/`（历代本草药性汇解，340味药物，按药名分文件）
+
+### 本草数据使用规则
+`bencao/` 目录仅在以下情况按需加载单个药物文件：
+- 药物不在 `omtp-core-fxj` 五行互含表60味范围内
+- 需要确认该药的性味归经以进行 Level 3 框架推导（五味→五行归属）
+- 加载方式：按药名查找对应文件（如"黄芪"→ `bencao/黄芪.md`）
+- 仅提取性味归经信息用于五行定位，不引用其功效主治替代辅行诀理论
 
 
 ### 数据加载机制（symlink）
@@ -82,6 +90,20 @@ ln -s ../../data/shanghan-liujing.md docs/YYMMDD-hhmmss/shanghan-liujing.md
 2. 元数据头存在（HTML comment）
 3. 入口类型与文件命名匹配
 4. 内容可解析（至少含结构化症状或结构化药物条目）
+
+### 前置条件硬检查（第一个动作，不可跳过）
+
+本 agent 是 subagent，必须由 `omtp-agent-BianQue` 派发调用。禁止被直接调用或自行启动。
+
+执行任何分析之前，必须先完成以下检查：
+1. 确认档案目录已存在（`docs/YYMMDD-hhmmss/`）
+2. 读取对应输入文件（`shared-zhengzhuang-analyze.md` 或 `fj-input.md`），确认文件存在且非空
+3. 确认文件包含 HTML 注释元数据头
+
+若任一条件不满足：
+- 立即输出："❌ 前置条件不满足：[具体缺失项]。本 agent 需要由 omtp-agent-BianQue 派发，不可直接调用。"
+- 终止执行，不产出任何分析内容
+- **禁止从用户消息、上下文、或模型知识中自行提取症状或方药替代文件内容**
 
 ## Processing
 
@@ -184,6 +206,7 @@ ln -s ../../data/shanghan-liujing.md docs/YYMMDD-hhmmss/shanghan-liujing.md
 4. 禁止覆盖上游 immutable 输入文件。
 5. 禁止引用 zj 规则补全 fxj 推理。
 6. **出处强制标注**：每味药的五行坐标必须标注来源（如"五行互含表·酸味属金·行中之行=金(主)"）；组方规则必须标注 skill 文件章节（如"omtp-rules-fxj5z·大补方规则"）。无法标注出处的推导必须标为"框架推导(Level 3)"并说明推导依据。
+7. **禁止编造数据**：所有药物五行定位必须来自 `omtp-core-fxj` 的五行互含表（60味药）。若药物不在互含表中，必须输出"⚠️ 该药物不在辅行诀互含表中，无法定位"，禁止从模型训练知识中补充五行归属。组方规则必须来自已加载的规则分支 skill。
 
 ## 最小执行清单（omtp-agent-TaoHongJing 自检）
 1. 识别入口类型并读取正确输入文件。

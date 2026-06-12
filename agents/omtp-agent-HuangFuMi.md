@@ -84,6 +84,20 @@ ln -s ../../data/zj-12zj-shou-taiyin-fei.md docs/YYMMDD-hhmmss/zj-12zj-shou-taiy
 3. 入口类型与文件命名匹配
 4. 内容可解析
 
+### 前置条件硬检查（第一个动作，不可跳过）
+
+本 agent 是 subagent，必须由 `omtp-agent-BianQue` 派发调用。禁止被直接调用或自行启动。
+
+执行任何分析之前，必须先完成以下检查：
+1. 确认档案目录已存在（`docs/YYMMDD-hhmmss/`）
+2. 读取对应输入文件（`shared-zhengzhuang-analyze.md` 或 `zj-input.md`），确认文件存在且非空
+3. 确认文件包含 HTML 注释元数据头
+
+若任一条件不满足：
+- 立即输出："❌ 前置条件不满足：[具体缺失项]。本 agent 需要由 omtp-agent-BianQue 派发，不可直接调用。"
+- 终止执行，不产出任何分析内容
+- **禁止从用户消息、上下文、或模型知识中自行提取症状或穴位替代文件内容**
+
 ## Processing
 
 ### zhengzhuang entry — acupuncture processing chain
@@ -164,6 +178,7 @@ ln -s ../../data/zj-12zj-shou-taiyin-fei.md docs/YYMMDD-hhmmss/zj-12zj-shou-taiy
 4. 禁止覆盖上游 immutable 输入文件。
 5. 禁止引用 fxj 规则补全 zj 推理。
 6. **出处强制标注**：每个取穴必须标注所用取穴法编号（①-⑫）和依据（如"omtp-rules-zj·子母补泻法·脾经土穴"）；穴位五行属性必须标注 data 文件来源（如"data/zj-12zj-foot-taiyin.md·太白·五行=土"）。无法标注出处的取穴必须标为"临床经验取穴"并说明理由。
+7. **禁止编造数据**：所有穴位名称、五行属性、特定穴归类必须来自已加载的 `data/zj-*.md` 文件。若穴位不在数据文件中，必须输出"⚠️ 该穴位不在数据文件中，无法确认属性"，禁止从模型训练知识中补充穴位归属。取穴法规则必须来自 `omtp-rules-zj` 或 `omtp-rules-ziwu-liuzhu`。
 
 ## 最小执行清单（omtp-agent-HuangFuMi 自检）
 1. 识别入口类型并读取正确输入文件。

@@ -28,6 +28,14 @@ mode: subagent
 - `yyd-bianshi.md`（8型辨识详解+亚型+鉴别+相火+复合型，辨识阶段加载）
 - `yyd-zufang/`（按病种分文件的组方数据，组方阶段按需加载1-2个文件）
 - `yyd-yaoxing.md`（圆运动药性提纲篇，7大类~120味药，选药时加载）
+- `bencao/`（历代本草药性汇解，340味药物，按药名分文件）
+
+### 本草数据使用规则
+`bencao/` 目录仅在以下情况按需加载单个药物文件：
+- 药物不在 `yyd-yaoxing.md` 的~120味范围内
+- 需要确认该药的性味归经以判断其升降浮沉归属
+- 加载方式：按药名查找对应文件（如"升麻"→ `bencao/升麻.md`）
+- 仅提取性味归经信息用于升降分类，不引用其功效主治替代圆运动理论
 
 ### 数据加载时序
 
@@ -90,6 +98,20 @@ ln -s ../../data/yyd-yaoxing.md docs/YYMMDD-hhmmss/yyd-yaoxing.md
 2. 元数据头存在（HTML comment）
 3. 入口类型为 `zhengzhuang`
 4. 内容可解析（含自然语言症状描述）
+
+### 前置条件硬检查（第一个动作，不可跳过）
+
+本 agent 是 subagent，必须由 `omtp-agent-BianQue` 派发调用。禁止被直接调用或自行启动。
+
+执行任何分析之前，必须先完成以下检查：
+1. 确认档案目录已存在（`docs/YYMMDD-hhmmss/`）
+2. 读取 `zz-input.md`，确认文件存在且非空
+3. 确认文件包含 HTML 注释元数据头
+
+若任一条件不满足：
+- 立即输出："❌ 前置条件不满足：[具体缺失项]。本 agent 需要由 omtp-agent-BianQue 派发，不可直接调用。"
+- 终止执行，不产出任何分析内容
+- **禁止从用户消息、上下文、或模型知识中自行提取症状替代文件内容**
 
 ## Processing
 
@@ -171,6 +193,7 @@ ln -s ../../data/yyd-yaoxing.md docs/YYMMDD-hhmmss/yyd-yaoxing.md
 5. 禁止引用 fxj/zj 规则补全 yyd 推理。
 6. 方剂输出只给配伍比例，不给绝对剂量。
 7. **出处强制标注**：每味药的升降归属必须标注来源（如"data/yyd-yaoxing.md·降类"或"omtp-core-yyd·8型总表"）；型别匹配必须标注匹配依据条目。无法标注出处的推导必须标为"框架推导(Level 3)"并说明推导依据。
+8. **禁止编造数据**：所有型别判定、药物选用必须来自已加载的 data 文件（yyd-bianshi.md/yyd-zufang/yyd-yaoxing.md）或 skill 规则。若数据文件中无对应型别或药物信息，必须输出"⚠️ 圆运动数据无对应：[原因]"，禁止从模型训练知识中补充圆运动体系内容。
 
 ## 最小执行清单（omtp-agent-PengZiYi 自检）
 1. 已读取 `zz-input.md` 原始症状描述。
