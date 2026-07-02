@@ -210,7 +210,7 @@ description: "辨证录/陈士铎/辨证/鉴别诊断 - Analyze symptoms through
 | 耳痛/耳聋/耳鸣 | `bzl/ertong-men.md` |
 | 目痛/目赤/目暗/视物不清 | `bzl/mutong-men.md` |
 | 血症/吐血/衄血/便血/尿血 | `bzl/xuezheng-men.md` |
-| 遍身骨痛/周身痛/骨节痛 | `bzl/bianshen-gutong-men.md` |
+| 遍身骨痛/周身痛/骨节痛 | `bzl/bianshen-men.md` |
 | 五郁/郁证/气郁/血郁 | `bzl/wuyu-men.md` |
 | 咳嗽/痰/久咳 | `bzl/kesou-men.md` |
 | 喘/气喘/哮喘/气急 | `bzl/chuan-men.md` |
@@ -239,7 +239,7 @@ description: "辨证录/陈士铎/辨证/鉴别诊断 - Analyze symptoms through
 | 五瘅/黄疸/发黄 | `bzl/wudan-men.md` |
 | 大泻/泄泻/久泻/水泻 | `bzl/daxie-men.md` |
 | 痢/痢疾/脓血便/里急后重 | `bzl/liji-men.md` |
-| 瘕/积聚/腹中包块 | `bzl/zhengji-men.md` |
+| 瘕/积聚/腹中包块 | `bzl/jia-men.md` |
 | 疟/疟疾/寒热往来 | `bzl/nueji-men.md` |
 | 虚损/虚劳/形体消瘦 | `bzl/xusun-men.md` |
 | 痨瘵/骨蒸/潮热盗汗 | `bzl/laozhai-men.md` |
@@ -247,7 +247,7 @@ description: "辨证录/陈士铎/辨证/鉴别诊断 - Analyze symptoms through
 | 阴阳脱/大汗亡阳/阴竭 | `bzl/yinyangtuo-men.md` |
 | 淋/小便淋漓/尿痛 | `bzl/linzheng-men.md` |
 | 大便闭/便秘/不通 | `bzl/dabianbi-men.md` |
-| 小便不通/癃闭 | `bzl/xiaobianbi-men.md` |
+| 小便不通/癃闭 | `bzl/xiaobianbutong-men.md` |
 | 内伤/劳倦/饮食伤 | `bzl/neishang-men.md` |
 | 疝气/奔豚/少腹痛引睾 | `bzl/shanqi-men.md` |
 | 阴痿/阳萎/不举 | `bzl/yinwei-men.md` |
@@ -276,7 +276,7 @@ description: "辨证录/陈士铎/辨证/鉴别诊断 - Analyze symptoms through
 | 血崩/崩漏/经血大下 | `bzl/xuebeng-men.md` |
 | 调经/月经不调/经期紊乱 | `bzl/tiaojing-men.md` |
 | 受妊/不孕/求子 | `bzl/shouren-men.md` |
-| 恶阻/妊娠呕吐/孕吐 | `bzl/ezu-men.md` |
+| 恶阻/妊娠呕吐/孕吐 | `bzl/renshen-men.md` |
 | 安胎/胎动不安/先兆流产 | `bzl/antai-men.md` |
 | 小产/流产/堕胎 | `bzl/xiaochan-men.md` |
 | 鬼胎/假孕/腹大如妊 | `bzl/guitai-men.md` |
@@ -290,7 +290,7 @@ description: "辨证录/陈士铎/辨证/鉴别诊断 - Analyze symptoms through
 | 肝痈/肝区痈肿 | `bzl/ganyong-men.md` |
 | 大肠痈/肠痈/阑尾 | `bzl/dachangyong-men.md` |
 | 小肠痈 | `bzl/xiaochangyong-men.md` |
-| 无名肿毒 | `bzl/wumingzhongdu-men.md` |
+| 无名肿毒 | `bzl/wuming-men.md` |
 | 对口痈/脑后痈 | `bzl/duikouyong-men.md` |
 | 脑疽/头顶疽 | `bzl/naoju-men.md` |
 | 囊痈/阴囊肿 | `bzl/nangyong-men.md` |
@@ -300,10 +300,10 @@ description: "辨证录/陈士铎/辨证/鉴别诊断 - Analyze symptoms through
 | 多骨痈/骨槽风 | `bzl/duoguyong-men.md` |
 | 恶疽/恶性疽 | `bzl/eju-men.md` |
 | 疔疮/疔毒 | `bzl/dingchuang-men.md` |
-| 杨梅疮/梅毒 | `bzl/yangmeichuang-men.md` |
+| 杨梅疮/梅毒 | `bzl/yangmei-men.md` |
 | 腰疽 | `bzl/yaoju-men.md` |
 | 擎疽 | `bzl/qingju-men.md` |
-| 脚疽/足疽 | `bzl/jiaoju-men.md` |
+| 脚疽/足疽 | `bzl/jiaoqu-men.md` |
 | 鬓疽/耳旁疽 | `bzl/binju-men.md` |
 | 唇疔/唇部疔 | `bzl/chundin-men.md` |
 | 瘰/瘰疬/颈部结核 | `bzl/luoli-men.md` |
@@ -314,7 +314,7 @@ description: "辨证录/陈士铎/辨证/鉴别诊断 - Analyze symptoms through
 | 物伤/虫咬/兽伤 | `bzl/wushang-men.md` |
 | 癞/癞疮/秃疮 | `bzl/lai-men.md` |
 | 刑杖/杖伤/外伤 | `bzl/xingzhang-men.md` |
-| 小儿惊/小儿疳/小儿吐泻 | `bzl/jinggan-tuxie-men.md` |
+| 小儿惊/小儿疳/小儿吐泻 | `bzl/jinggan-men.md` |
 | 小儿便虫/蛔虫/蛲虫 | `bzl/bianchong-men.md` |
 | 痘疮/天花/出痘 | `bzl/douchuang-men.md` |
 | 疹/麻疹/发疹 | `bzl/zhenzheng-men.md` |

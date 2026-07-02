@@ -10,7 +10,7 @@ An AI skill set + agent orchestration layer for **analyzing Traditional Chinese 
 
 Oh My TCM Powers (中医之心) provides a structured, rule-driven framework for analyzing herbal formulas, acupoint combinations, and clinical symptoms using the *Fuxingjue* theory system. It deduces therapeutic mechanisms through five-phase relationships, ti-yong-hua (body-function-transformation) layering, and quantified composition rules.
 
-- **5 agents + 18 skills**: agents handle routing and orchestration, skills provide pure domain knowledge
+- **5 agents + 17 skills**: agents handle routing and orchestration, skills provide pure domain knowledge
 - **Three-layer architecture**: agent (routing/orchestration/archive) → skill (core theory/rules/analysis methods) → data (herb tables/acupoint tables/symptom data)
 - **Parallel quad-path analysis**: symptom analysis simultaneously derives Fuxingjue herbal formula, Yuanyundong circular-motion prescription, Bianzhenglu diagnostic-reversal prescription, and acupuncture point combination, with convergence and divergence comparison
 - **Bidirectional analysis**: formula→symptom and symptom→formula, cross-validating each other
@@ -144,7 +144,7 @@ Data Layer (read-only, symlinked per session)
   yyd-bianshi.md                # circular-motion identification data (8 types + subtypes + differentials + compound types)
   yyd-zufang/                   # circular-motion prescription data (per-disease files)
   yyd-yaoxing.md                # circular-motion medicinal classification (~120 herbs)
-  bzl/                          # Bianzhenglu 125-men case data (per-men files + 凡例 + 序跋)
+  bzl/                          # Bianzhenglu 126-men case data (per-men files)
   bencao/                       # Historical materia medica (340 herbs, per-herb files)
   zj-12zj-*.md                  # 12 regular meridian acupoints
   zj-qj8m-*.md                  # 8 extraordinary meridian points
@@ -307,7 +307,7 @@ oh-my-tcmpowers/
 │   ├── yyd-bianshi.md                          # Circular-motion identification data (8 types + subtypes + differentials + compound types)
 │   ├── yyd-zufang/                             # Circular-motion prescription data (per-disease files)
 │   ├── yyd-yaoxing.md                          # Circular-motion medicinal classification (~120 herbs)
-│   ├── bzl/                                    # Bianzhenglu 辨证录 case data (125-men + 凡例 + 序跋)
+│   ├── bzl/                                    # Bianzhenglu 辨证录 case data (126-men, per-men files)
 │   ├── bencao/                                 # Historical materia medica (340 herbs, per-herb files)
 │   ├── zj-12zj-*.md                            # 12 regular meridian acupoint data files
 │   └── zj-qj8m-*.md                            # 8 extraordinary meridian acupoint data files
@@ -354,7 +354,7 @@ The system references the following classical texts:
 | 《温热论》(*Wenre Lun*) | 叶天士 (Ye Tianshi) | Qing (清) | Wei-Qi-Ying-Xue four-level staging system for warm diseases |
 | 《温病条辨》(*Wenbing Tiaobian*) | 吴鞠通 (Wu Jutong) | Qing (清) | Triple-burner (三焦) spatial staging system for warm diseases |
 | 《圆运动的古中医学》(*Yuanyundong de Gu Zhongyixue*) | 彭子益 (Peng Ziyi) | Republic (民国) | Circular-motion ascending-descending model, central-qi pivot theory, 8 pathological types, medicinal classification by qi-dynamic function |
-| 《辨证录》(*Bianzhenglu*) | 陈士铎 (Chen Shiduo) | Qing (清) | 14-volume, 125-men diagnostic-reversal system: "似X非X" differentiation, bu-fa dominant prescriptions, fan-zuo pairing, large-dose multi-organ coordination |
+| 《辨证录》(*Bianzhenglu*) | 陈士铎 (Chen Shiduo) | Qing (清) | 14-volume, 126-men diagnostic-reversal system: "似X非X" differentiation, bu-fa dominant prescriptions, fan-zuo pairing, large-dose multi-organ coordination |
 | 《脉诀阐微》(*Maijue Chanwei*) | 陈士铎 (Chen Shiduo) | Qing (清) | Five-chapter pulse classic: 38-character pulse formula, compound pulse combination diagnosis, position×pulse→symptom mapping, life-death pulse prognosis |
 | 《历代本草药性汇解》 | 综合 (Multiple) | Various | Historical materia medica compilation: 340 herbs with性味归经 from multiple classical sources across dynasties |
 

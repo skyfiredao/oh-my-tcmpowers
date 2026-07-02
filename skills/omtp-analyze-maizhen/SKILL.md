@@ -1,22 +1,22 @@
 ---
 name: omtp-analyze-maizhen
-description: "脉诊/把脉/脉象/切脉/诊脉 - Analyze pulse descriptions to deduce organ-pathology conclusions and cross-validate against symptom-based diagnosis through Fuxingjue framework"
+description: "脉诊/把脉/脉象/切脉/诊脉 - Pulse analysis: extract pulse descriptions, deduce organ-pathology conclusions through 六部脉位 + 脉质五行归属 + 八纲判定"
 ---
 
-# 辅行诀脉象分析
+# 脉象分析
 
-本技能负责辅行诀体系中的脉象分析方法论。输入脉象描述后，完成"脉象提取→六部脉位定脏腑→脉质五行归属→参数轴判定→体用化层推断→交叉验证"六步分析。该分析结果作为 omtp-analyze-zhengzhuang 步骤 1-5 结论的逆向验证通道，从脉象维度独立推导脏腑-病机结论后与症状分析对照。本技能不涉及方剂推导或取穴推导。
+脉象分析方法论。输入脉象描述后，完成"脉象提取→六部脉位定脏腑→脉质五行归属→参数轴判定→（可选）体用化层推断→交叉验证"分析。结果作为 omtp-analyze-zhengzhuang 步骤 1-5 结论的逆向验证通道。本技能不涉及方剂推导或取穴推导。
 
 脉象分类以李时珍《濒湖脉学》27 脉为主体框架，王叔和《脉经》24 脉为基线参照。
 
 ## 前置条件
 
-必须前置加载 omtp-core-fxj 作为理论基础（五行互含、体用化结构）。
+第五步（体用化层推断）需要 omtp-core-fxj，其他步骤无依赖。
 
 本 skill 从**档案目录**读取数据文件。档案目录由调用方（agent）指定，格式为 `docs/YYMMDD-hhmmss/`，调用前所需数据文件已由 agent 从 `data/` symlink 到该目录。正文中「档案目录中 xxx.md」均指此路径。
 
 数据文件：
-- `fxj-maixiang.md`：27脉分类表、六部脉位映射、五行归属、参数轴规则、复合脉象判定表、经文脉象引用
+- `fxj-maixiang.md`：27脉分类表、六部脉位映射、五行归属、参数轴规则、复合脉象判定表
 - `maizhen-maijue.md`：陈士铎《脉诀阐微》五篇——单脉主病详解（第一篇）、兼见脉组合→病机映射（第二篇）、寸关尺×脉象→具体症候（第三篇）、生死脉预后判断（第四篇）、妇人小儿脉诊（第五篇）
 
 ## 输入
@@ -174,7 +174,7 @@ description: "脉诊/把脉/脉象/切脉/诊脉 - Analyze pulse descriptions to
 
 综合八纲结论：[表/里][寒/热][虚/实]
 
-## 第五步：体用化层推断
+## 第五步：体用化层推断（仅辅行诀体系）
 
 将脉象分析结果映射到辅行诀体用化三层体系。对照档案目录中 `fxj-maixiang.md` 复合脉象判定表中的体用化层列。
 
@@ -249,8 +249,8 @@ description: "脉诊/把脉/脉象/切脉/诊脉 - Analyze pulse descriptions to
 
 | 关系 | 技能 | 说明 |
 |------|------|------|
-| 下游（前置依赖） | omtp-core-fxj | 五行互含、体用化结构（共用理论基础） |
-| 上游（触发条件） | omtp-analyze-zhengzhuang | 症状分析步骤 1-5 完成后，若存在脉象信息则触发本技能执行步骤 6 |
-| 数据源 | 档案目录中 fxj-maixiang.md | 27 脉分类表、六部脉位映射、五行归属、参数轴规则、复合脉象表、经文脉象引用 |
+| 可选耦合 | omtp-core-fxj | 仅当调用方为辅行诀体系且需要第五步体用化推断时加载 |
+| 上游（触发条件） | omtp-analyze-zhengzhuang | 症状分析步骤 1-5 完成后，若存在脉象信息则触发本技能 |
+| 数据源 | 档案目录中 fxj-maixiang.md | 27 脉分类表、六部脉位映射、五行归属、参数轴规则、复合脉象表 |
 | 数据源 | 档案目录中 maizhen-maijue.md | 陈士铎《脉诀阐微》：单脉主病详解、兼见脉→病机、部位×脉象→症候、生死脉、妇人小儿 |
 | 平行（交叉验证） | omtp-analyze-fangji | 方剂分析的脏腑结论可与脉象分析交叉验证 |
